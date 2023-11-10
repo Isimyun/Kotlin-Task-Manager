@@ -21,4 +21,14 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, TaskDetailsActivity::class.java)
         startActivity(intent)
     }
+
+    fun goToAddTask(view: View) {
+        val intent = Intent(this, AddTaskActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToLogin(view: View) {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
 }

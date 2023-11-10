@@ -1,25 +1,38 @@
-<!-- Inside activity_main.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <Button
         android:id="@+id/btnTaskList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Task List"
         android:onClick="goToTaskList"
-        android:layout_centerInParent="true"/>
+        android:text="Task List" />
 
     <Button
         android:id="@+id/btnTaskDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToTaskDetails"
+        android:text="Task Detail" />
+
+    <Button
+        android:id="@+id/btnAddTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToAddTask"
+        android:text="Add Task" />
+
+    <Button
+        android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Task Details"
-        android:onClick="goToTaskDetails"
-        android:layout_below="@id/btnTaskList"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+        android:onClick="goToLogin"
+        android:text="Logout" />
+</LinearLayout>
