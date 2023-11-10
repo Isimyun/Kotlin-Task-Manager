@@ -12,8 +12,8 @@ class TaskDetailsActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
 
-        val taskName = bundle?.getString("task_name")
-        val taskDescription = bundle?.getString("task_description")
+        val taskName = bundle?.getString("task_name_from_task_list")
+        val taskDescription = bundle?.getString("task_description_from_task_list")
 
         val txvTaskName: TextView = findViewById(R.id.txvTaskName)
         val txvTaskDescription: TextView = findViewById(R.id.txvTaskDescription)
