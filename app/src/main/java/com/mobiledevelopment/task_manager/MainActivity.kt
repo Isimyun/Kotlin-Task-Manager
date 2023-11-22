@@ -11,24 +11,4 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-
-    fun goToTaskList(view: View) {
-        val intent = Intent(this, TaskListActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun goToTaskDetails(view: View) {
-        val intent = Intent(this, TaskDetailsActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun goToAddTask(view: View) {
-        val intent = Intent(this, AddTaskActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun goToLogin(view: View) {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-    }
 }
