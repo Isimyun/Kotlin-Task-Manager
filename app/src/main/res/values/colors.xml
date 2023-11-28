@@ -10,6 +10,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="text_color">#21108A</color>
     <color name="secondary_color">#D5CEFF</color>
 </resources>

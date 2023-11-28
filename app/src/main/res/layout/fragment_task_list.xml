@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SplashFragment">
+    tools:context=".fragments.TaskListFragment">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:scaleType="fitXY"
         android:src="@drawable/design_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/addTaskBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_baseline_add_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/imageView2"
@@ -41,19 +51,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TASK\nMANAGER"
-        android:textColor="@color/text_color"
-        android:textStyle="italic"
-        android:gravity="center_horizontal"
-        android:fontFamily="@font/inter_extra_bold"
-        android:textSize="60sp"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/addTaskBtn" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

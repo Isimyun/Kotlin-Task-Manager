@@ -58,5 +58,25 @@
         android:id="@+id/homeFragment"
         android:name="com.mobiledevelopment.task_manager.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.mobiledevelopment.task_manager.fragments.TaskListFragment"
+        android:label="fragment_task_list"
+        tools:layout="@layout/fragment_task_list" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mobiledevelopment.task_manager.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
