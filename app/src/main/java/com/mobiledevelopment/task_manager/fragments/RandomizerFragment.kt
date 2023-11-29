@@ -59,23 +59,30 @@ class RandomizerFragment : Fragment(), SensorEventListener {
     }
 
     private fun fetchTasksFromDatabase() {
-        taskRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                taskList.clear()
-                for (taskSnapshot in snapshot.children) {
-                    for (taskNameSnapshot in taskSnapshot.children) {
-                        val taskName = taskNameSnapshot.getValue(String::class.java)
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            val userId = currentUser.uid
+
+            taskRef.child(userId).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    taskList.clear()
+                    for (taskSnapshot in snapshot.children) {
+                        val taskName = taskSnapshot.getValue(String::class.java)
                         taskName?.let {
                             taskList.add(it)
                         }
                     }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, "Database Error", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(context, "Database Error", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            // Handle the case where the user is not authenticated
+            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onResume() {
