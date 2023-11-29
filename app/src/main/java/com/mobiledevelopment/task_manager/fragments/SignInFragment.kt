@@ -41,7 +41,6 @@ class SignInFragment : Fragment() {
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 loginUser(email, pass)
-                Toast.makeText(context, "Login successfully", Toast.LENGTH_SHORT).show()
             }
             else
                 Toast.makeText(context, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
@@ -50,8 +49,10 @@ class SignInFragment : Fragment() {
 
     private fun loginUser(email: String, pass: String) {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
-            if (it.isSuccessful)
+            if (it.isSuccessful) {
                 navController.navigate(R.id.action_signInFragment_to_homeFragment)
+                Toast.makeText(context, "Login successfully", Toast.LENGTH_SHORT).show()
+            }
             else
                 Toast.makeText(context, "Invalid credentials", Toast.LENGTH_SHORT).show()
 
