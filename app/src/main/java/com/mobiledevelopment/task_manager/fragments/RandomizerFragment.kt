@@ -52,7 +52,7 @@ class RandomizerFragment : Fragment(), SensorEventListener {
         taskList = mutableListOf()
 
         if (accelerometer == null) {
-            Toast.makeText(context, "Accelerometer not detected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Accelerometer is not detected", Toast.LENGTH_SHORT).show()
         }
 
         fetchTasksFromDatabase()
