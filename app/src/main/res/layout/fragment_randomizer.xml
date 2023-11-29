@@ -33,54 +33,41 @@
 
 
     <ImageView
-        android:id="@+id/btnProfile"
-        android:layout_width="160dp"
-        android:layout_height="190dp"
-        android:layout_marginTop="50dp"
-        android:onClick="navigateToProfileFragment"
-        android:padding="20dp"
-        android:src="@drawable/user"
+        android:id="@+id/shakePhone"
+        android:layout_width="250dp"
+        android:layout_height="300dp"
+        android:padding="10dp"
+        android:src="@drawable/shake_phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-
-    <ImageView
-        android:id="@+id/btnTaskList"
-        android:layout_width="160dp"
-        android:layout_height="190dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="44dp"
-        android:padding="15dp"
-        android:onClick="navigateToTaskListFragment"
-        android:src="@drawable/list"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_extra_bold"
+        android:gravity="center_horizontal"
+        android:text="SHAKE YOUR PHONE!!"
+        android:textColor="@color/text_color"
+        android:textSize="50sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnProfile"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"/>
-
-    <ImageView
-        android:id="@+id/btnLogout"
-        android:layout_width="160dp"
-        android:layout_height="190dp"
-        android:onClick="performLogout"
-        android:src="@drawable/logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.824"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTaskList"/>
+        app:layout_constraintTop_toBottomOf="@+id/shakePhone"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/btnRandomizer"
-        android:layout_width="160dp"
-        android:layout_height="190dp"
-        android:padding="15dp"
-        android:onClick="navigateToRandomizerFragment"
-        android:src="@drawable/wheel_of_fortune"
+    <TextView
+        android:id="@+id/accelerometerValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="X: 0.0, Y: 0.0, Z: 0.0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProfile"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

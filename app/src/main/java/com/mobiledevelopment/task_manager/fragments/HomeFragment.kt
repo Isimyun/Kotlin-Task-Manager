@@ -42,6 +42,10 @@ class HomeFragment : Fragment() {
             navigateToTaskListFragment()
         }
 
+        binding.btnRandomizer.setOnClickListener {
+            navigateToRandomizer()
+        }
+
         binding.btnLogout.setOnClickListener {
             performLogout()
         }
@@ -57,9 +61,20 @@ class HomeFragment : Fragment() {
         navController.navigate(R.id.action_homeFragment_to_profileFragment)
     }
 
+    private fun navigateToRandomizer() {
+        navController.navigate(R.id.action_homeFragment_to_randomizerFragment)
+    }
+
     // Inside the function where you perform logout
     private fun performLogout() {
+        // Use FirebaseAuth to sign out the user
+        FirebaseAuth.getInstance().signOut()
+
+        // After signing out, navigate to the sign-in fragment
         navController.navigate(R.id.action_homeFragment_to_signInFragment)
+
+        // Optionally, you can display a toast or perform other actions after logout
+        Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
     }
 
     private fun init(view: View) {

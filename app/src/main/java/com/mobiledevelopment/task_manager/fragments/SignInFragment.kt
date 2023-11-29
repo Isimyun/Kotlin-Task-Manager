@@ -39,9 +39,10 @@ class SignInFragment : Fragment() {
             val email = binding.emailEt.text.toString()
             val pass = binding.passEt.text.toString()
 
-            if (email.isNotEmpty() && pass.isNotEmpty())
-
+            if (email.isNotEmpty() && pass.isNotEmpty()) {
                 loginUser(email, pass)
+                Toast.makeText(context, "Login successfully", Toast.LENGTH_SHORT).show()
+            }
             else
                 Toast.makeText(context, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
         }

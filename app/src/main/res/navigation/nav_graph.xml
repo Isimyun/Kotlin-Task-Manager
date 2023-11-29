@@ -68,15 +68,31 @@
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_randomizerFragment"
+            app:destination="@id/randomizerFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskListFragment"
         android:name="com.mobiledevelopment.task_manager.fragments.TaskListFragment"
         android:label="fragment_task_list"
-        tools:layout="@layout/fragment_task_list" />
+        tools:layout="@layout/fragment_task_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_addTaskPopUpFragment"
+            app:destination="@id/addTaskPopUpFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mobiledevelopment.task_manager.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/randomizerFragment"
+        android:name="com.mobiledevelopment.task_manager.fragments.RandomizerFragment"
+        android:label="RandomizerFragment" />
+    <dialog
+        android:id="@+id/addTaskPopUpFragment"
+        android:name="com.mobiledevelopment.task_manager.fragments.AddTaskPopUpFragment"
+        android:label="fragment_add_task_pop_up"
+        tools:layout="@layout/fragment_add_task_pop_up" />
 </navigation>
