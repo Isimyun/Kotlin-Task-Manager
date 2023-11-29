@@ -1,20 +1,18 @@
 package com.mobiledevelopment.task_manager.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.mobiledevelopment.task_manager.R
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.mobiledevelopment.task_manager.R
 import com.mobiledevelopment.task_manager.databinding.FragmentHomeBinding
-import com.mobiledevelopment.task_manager.databinding.FragmentSignInBinding
 
 class HomeFragment : Fragment() {
 
@@ -73,8 +71,12 @@ class HomeFragment : Fragment() {
         // After signing out, navigate to the sign-in fragment
         navController.navigate(R.id.action_homeFragment_to_signInFragment)
 
-        // Optionally, you can display a toast or perform other actions after logout
+        // Clear the back stack
+        navController.popBackStack(R.id.signInFragment, false)
+
         Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+
     }
 
     private fun init(view: View) {

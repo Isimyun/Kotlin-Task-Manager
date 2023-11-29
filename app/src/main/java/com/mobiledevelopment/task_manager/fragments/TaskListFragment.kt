@@ -28,7 +28,7 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
     private lateinit var databaseRef : DatabaseReference
     private lateinit var navController : NavController
     private lateinit var binding : FragmentTaskListBinding
-    private lateinit var popUpFragment : AddTaskPopUpFragment
+    private var popUpFragment : AddTaskPopUpFragment? = null
     private lateinit var adapter : TaskAdapter
     private lateinit var list : MutableList<TaskData>
 
@@ -51,11 +51,14 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
 
     private fun registerEvents() {
         binding.addTaskBtn.setOnClickListener {
+            if (popUpFragment != null) {
+                childFragmentManager.beginTransaction().remove(popUpFragment!!).commit()
+            }
             popUpFragment = AddTaskPopUpFragment()
-            popUpFragment.setListener(this)
-            popUpFragment.show(
+            popUpFragment!!.setListener(this)
+            popUpFragment!!.show(
                 childFragmentManager,
-                "AddTaskPopUpFragment"
+                AddTaskPopUpFragment.TAG
             )
         }
     }
@@ -102,13 +105,29 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
         databaseRef.push().setValue(task).addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, "Task added successfully!", Toast.LENGTH_SHORT).show()
-                etAddTask.text = null
             }
             else {
                 Toast.makeText(context, "Failed to add task", Toast.LENGTH_SHORT).show()
             }
 
-            popUpFragment.dismiss()
+            popUpFragment!!.dismiss()
+            etAddTask.text = null
+        }
+    }
+
+    override fun onUpdateTask(taskData: TaskData, etAddTask: TextInputEditText) {
+        val map = HashMap<String, Any>()
+        map[taskData.taskId] = taskData.task
+        databaseRef.updateChildren(map).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(context, "Task updated successfully", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(context, "An error occurred!", Toast.LENGTH_SHORT).show()
+            }
+
+            popUpFragment!!.dismiss()
+            etAddTask.text = null
         }
     }
 
@@ -124,6 +143,11 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
     }
 
     override fun onEditTaskBtnClicked(taskData: TaskData) {
-        TODO("Not yet implemented")
+        if (popUpFragment != null) {
+            childFragmentManager.beginTransaction().remove(popUpFragment!!).commit()
+            popUpFragment = AddTaskPopUpFragment.newInstance(taskData.taskId, taskData.task)
+            popUpFragment!!.setListener(this)
+            popUpFragment!!.show(childFragmentManager, AddTaskPopUpFragment.TAG)
+        }
     }
 }
