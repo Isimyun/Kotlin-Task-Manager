@@ -32,11 +32,14 @@ class SplashFragment : Fragment() {
 
         init(view)
 
+        // Check if the user is logged in
         val isLogin: Boolean = mAuth.currentUser != null
 
+        // Use a handler to delay navigation for 2000 milliseconds (2 seconds)
         val handler = Handler(Looper.myLooper()!!)
         handler.postDelayed({
 
+            // Navigate to the appropriate destination based on login status
             if (isLogin)
                 navController.navigate(R.id.action_splashFragment_to_homeFragment)
             else

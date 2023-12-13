@@ -19,6 +19,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var navController: NavController
 
+    // Instantiates view
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    // Buttons on the home page
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,26 +51,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    // Inside the function where you navigate to TaskListFragment
+    // Go to task list fragment
     private fun navigateToTaskListFragment() {
        navController.navigate(R.id.action_homeFragment_to_taskListFragment)
     }
 
-    // Inside the function where you navigate to ProfileFragment
+    // Go to profile fragment
     private fun navigateToProfileFragment() {
         navController.navigate(R.id.action_homeFragment_to_profileFragment)
     }
 
+    // Go to randomizer fragment
     private fun navigateToRandomizer() {
         navController.navigate(R.id.action_homeFragment_to_randomizerFragment)
     }
 
-    // Inside the function where you perform logout
+    // Logout
     private fun performLogout() {
         // Use FirebaseAuth to sign out the user
         FirebaseAuth.getInstance().signOut()
 
-        // After signing out, navigate to the sign-in fragment
+        //After signing out, navigate to the sign-in fragment
         navController.navigate(R.id.action_homeFragment_to_signInFragment)
 
         // Clear the back stack

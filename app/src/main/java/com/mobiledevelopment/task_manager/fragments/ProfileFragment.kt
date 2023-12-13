@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -42,12 +43,15 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    // Get instance from database
+    // Uses navigation controller
     private fun init(view: View) {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference.child("Tasks")
         navController = Navigation.findNavController(view)
     }
 
+    // This is just displaying the user's data
     private fun displayUserData() {
         val currentUser = auth.currentUser
         currentUser?.let {
@@ -55,6 +59,7 @@ class ProfileFragment : Fragment() {
             binding.userName.text = it.email
         }
     }
+
 
     private fun displayTaskCount() {
         val currentUser = auth.currentUser
@@ -73,14 +78,15 @@ class ProfileFragment : Fragment() {
                         binding.numberOfTasks.text = "$taskCount TASKs PENDING"
                     }
 
+                    // Display error message when faced errors
                     override fun onCancelled(error: DatabaseError) {
-                        // Handle the failure to retrieve tasks
-                        // You can add proper error handling here
+                        Toast.makeText(context, "Database Error", Toast.LENGTH_SHORT).show()
                     }
                 })
         }
     }
 
+    // Navigates to task list fragment
     fun navigateToTaskListFragment() {
         navController.navigate(R.id.action_profileFragment_to_taskListFragment)
     }

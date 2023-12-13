@@ -45,12 +45,15 @@ class RandomizerFragment : Fragment(), SensorEventListener {
         init(view)
     }
 
+    // Initialize the sensor manager, then use it to get the accelerometer from the device
+    // Get tasks from database
     private fun init(view: View) {
         sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         taskRef = FirebaseDatabase.getInstance().getReference("Tasks")
         taskList = mutableListOf()
 
+        // Display error message in case there isn't an accelerometer
         if (accelerometer == null) {
             Toast.makeText(context, "Accelerometer is not detected", Toast.LENGTH_SHORT).show()
         }
@@ -59,11 +62,14 @@ class RandomizerFragment : Fragment(), SensorEventListener {
     }
 
     private fun fetchTasksFromDatabase() {
+        // Make sure the data is from the user that is logged in
         val currentUser = FirebaseAuth.getInstance().currentUser
 
+        // If user exist, save user ID
         if (currentUser != null) {
             val userId = currentUser.uid
 
+            // Takes the tasks ONLY FROM CURRENT USER, avoids taking data from another user
             taskRef.child(userId).addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     taskList.clear()
@@ -85,11 +91,13 @@ class RandomizerFragment : Fragment(), SensorEventListener {
         }
     }
 
+    // When phone is shaken
     override fun onResume() {
         super.onResume()
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
+    // When phone is idle
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
@@ -100,9 +108,10 @@ class RandomizerFragment : Fragment(), SensorEventListener {
     }
 
     @SuppressLint("SetTextI18n")
+    //
     override fun onSensorChanged(event: SensorEvent) {
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-            // Update the TextView with accelerometer values
+            // Value of x, y, z will keep changing to show that accelerometer is working
             binding.accelerometerValues.text =
                 "X: ${event.values[0]}, Y: ${event.values[1]}, Z: ${event.values[2]}"
 

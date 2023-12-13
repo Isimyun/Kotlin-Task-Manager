@@ -31,10 +31,12 @@ class SignInFragment : Fragment() {
 
         init(view)
 
+        // Navigates to sign up fragment when user clicks "Sign Up"
         binding.textViewSignUp.setOnClickListener {
             navController.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
+        // Validates user input, checks whether user exists in database
         binding.nextBtn.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passEt.text.toString()
@@ -47,6 +49,7 @@ class SignInFragment : Fragment() {
         }
     }
 
+    // On successful login, navigates to homepage
     private fun loginUser(email: String, pass: String) {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
             if (it.isSuccessful) {
@@ -59,6 +62,7 @@ class SignInFragment : Fragment() {
         }
     }
 
+    // Initializes navigation controller and authentication
     private fun init(view: View) {
         navController = Navigation.findNavController(view)
         auth = FirebaseAuth.getInstance()

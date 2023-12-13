@@ -44,8 +44,13 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize components
         init(view)
+
+        // Fetch data from Firebase
         getDataFromFirebase()
+
+        // Register UI events
         registerEvents()
     }
 
@@ -64,8 +69,13 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
     }
 
     private fun init(view: View) {
+        // Set up Navigation Controller
         navController = Navigation.findNavController(view)
+
+        // Set up Firebase
         auth = FirebaseAuth.getInstance()
+
+        // Set up RecyclerView and Adapter
         databaseRef = FirebaseDatabase.getInstance().reference.child("Tasks").child(auth.currentUser?.uid.toString())
 
         binding.mainRecyclerView.setHasFixedSize(true)
@@ -76,6 +86,7 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
         binding.mainRecyclerView.adapter = adapter
     }
 
+    // Fetch data from Firebase and update the UI
     private fun getDataFromFirebase() {
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -101,6 +112,7 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
     }
 
 
+    // Save a new task to Firebase
     override fun onSaveTask(task: String, etAddTask: TextInputEditText) {
         databaseRef.push().setValue(task).addOnCompleteListener {
             if (it.isSuccessful) {
@@ -115,6 +127,7 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
         }
     }
 
+    // Update an existing task in Firebase
     override fun onUpdateTask(taskData: TaskData, etAddTask: TextInputEditText) {
         val map = HashMap<String, Any>()
         map[taskData.taskId] = taskData.task
@@ -131,6 +144,7 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
         }
     }
 
+    // Delete a task from Firebase
     override fun onDeleteTaskBtnClicked(taskData: TaskData) {
         databaseRef.child(taskData.taskId).removeValue().addOnCompleteListener {
             if (it.isSuccessful) {
@@ -142,6 +156,7 @@ class TaskListFragment : Fragment(), AddTaskPopUpFragment.DialogNextBtnClickList
         }
     }
 
+    // Edit a task using AddTaskPopUpFragment
     override fun onEditTaskBtnClicked(taskData: TaskData) {
         if (popUpFragment != null) {
             childFragmentManager.beginTransaction().remove(popUpFragment!!).commit()

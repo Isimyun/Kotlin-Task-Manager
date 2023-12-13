@@ -78,6 +78,10 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
 
 
+
+    implementation("io.coil-kt:coil-compose:1.3.2")
+
+
     val nav_version = "2.7.5"
 
     // Kotlin

@@ -38,17 +38,20 @@ class SignUpFragment : Fragment() {
             navController.navigate(R.id.action_signUpFragment_to_signInFragment)
         }
 
+        // Set click listener for the "Next" button
         binding.nextBtn.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passEt.text.toString()
             val verifyPass = binding.verifyPassEt.text.toString()
 
+            // Check if fields are not empty
             if (email.isNotEmpty() && pass.isNotEmpty() && verifyPass.isNotEmpty()) {
+                // Check if passwords match
                 if (pass == verifyPass) {
-
+                    // Attempt to register the user
                     registerUser(email, pass)
-
-                } else {
+                }
+                else {
                     Toast.makeText(context, "Password is not same", Toast.LENGTH_SHORT).show()
                 }
             } else
@@ -57,10 +60,13 @@ class SignUpFragment : Fragment() {
 
     }
 
+    // Registers user with provided email and password
     private fun registerUser(email: String, pass: String) {
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
+            // Navigates to homepage upon successful registration
             if (it.isSuccessful)
                 navController.navigate(R.id.action_signUpFragment_to_homeFragment)
+            // Display error message when faced error
             else
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
