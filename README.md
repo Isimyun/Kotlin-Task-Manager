@@ -50,3 +50,8 @@ To run this project, clone the repository and open it in Android Studio. Make su
 - Kotlin for Android app development.
 - Firebase Authentication for secure user login and registration.
 - Firebase Firestore for real-time data storage and retrieval.
+
+## Demo Video
+## Demo
+
+[Watch the Demo on Vimeo](https://vimeo.com/1024844075)
